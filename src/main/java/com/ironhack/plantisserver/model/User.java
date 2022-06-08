@@ -1,4 +1,4 @@
-package com.ironhack.projectmanagementserver.model;
+package com.ironhack.plantisserver.model;
 
 import com.ironhack.plantisserver.model.Role;
 import lombok.AllArgsConstructor;
