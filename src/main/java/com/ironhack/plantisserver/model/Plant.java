@@ -24,5 +24,5 @@ public class Plant {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "general_plant_id")
-    private List <GeneralPlant> generalPlantList;
+    private GeneralPlant generalPlantList;
 }
