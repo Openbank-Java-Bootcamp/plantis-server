@@ -33,23 +33,4 @@ public class GeneralPlantController {
         return generalPlantRepository.findAll();
     }
 
-    @PostMapping("/generalplant")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addGeneralPlant(@RequestBody @Valid GeneralPlant generalPlant){
-        generalPlantService.saveGeneralPlant(generalPlant);
-    }
-
-    @PutMapping("/generalplant/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateGeneralPlant(@PathVariable Long id,@RequestBody @Valid GeneralPlant generalPlant){
-        generalPlantService.update(id, generalPlant);
-    }
-
-    @DeleteMapping("/generalplant/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteGeneralPlant(@PathVariable Long id){
-        generalPlantService.deleteGeneralPlant(id);
-    }
-
-
 }

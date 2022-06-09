@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ironhack</groupId>
-	<artifactId>plantis-server</artifactId>
+	<artifactId>plantisserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>plantis-server</name>
+	<name>plantisserver</name>
 	<description>App to track plants</description>
 	<properties>
 		<java.version>17</java.version>

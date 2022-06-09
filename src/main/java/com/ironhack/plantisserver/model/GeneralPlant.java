@@ -19,17 +19,15 @@ public class GeneralPlant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Provide a url image.")
+    private String image;
     @NotNull
     @Size(min=3,max=20, message="Must be between 3 and 20 characters.")
     private String name;
     @NotEmpty(message = "Provide a description.")
     private String description;
     @NotEmpty(message = "Provide a preference of light.")
-    private Light lightPreference;
+    private Light lightRequirement;
     @NotEmpty(message = "Provide a water quantity.")
-    private String waterCare;
-    @NotEmpty(message = "Provide a url image.")
-    private String url;
-    @OneToMany(mappedBy = "plant",cascade = CascadeType.ALL)
-    private List<Plant> plants;
+    private String waterRequirement;
 }
