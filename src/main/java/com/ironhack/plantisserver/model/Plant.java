@@ -33,7 +33,6 @@ public class Plant {
     @Size(min=3,max=200, message="Must be between 3 and 200 characters.")
     private String notes;
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany(mappedBy = "userFavorites")
+    private List<User> users;
 }

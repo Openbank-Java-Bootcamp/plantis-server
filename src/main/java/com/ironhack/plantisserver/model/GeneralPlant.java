@@ -27,7 +27,15 @@ public class GeneralPlant {
     @NotEmpty(message = "Provide a description.")
     private String description;
     @NotEmpty(message = "Provide a preference of light.")
-    private Light lightRequirement;
+    private String lightRequirement;
     @NotEmpty(message = "Provide a water quantity.")
     private String waterRequirement;
+
+    public GeneralPlant(String image, String name, String description, String lightRequirement, String waterRequirement) {
+        this.image = image;
+        this.name = name;
+        this.description = description;
+        this.lightRequirement = lightRequirement;
+        this.waterRequirement = waterRequirement;
+    }
 }

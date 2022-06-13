@@ -3,6 +3,7 @@ package com.ironhack.plantisserver.controller;
 import com.google.gson.Gson;
 
 import com.ironhack.plantisserver.DTO.UserVerifyDTO;
+import com.ironhack.plantisserver.model.GeneralPlant;
 import com.ironhack.plantisserver.model.User;
 import com.ironhack.plantisserver.repository.UserRepository;
 import com.ironhack.plantisserver.service.impl.UserService;
@@ -31,6 +32,7 @@ public class AuthController {
     }
 
 
+
     @GetMapping("/verify")
     @ResponseStatus(HttpStatus.OK)
     public String verifyToken(Authentication authentication) {
@@ -41,4 +43,5 @@ public class AuthController {
         String userDetails = gson.toJson(userVerifyDTO);
         return userDetails;
     }
+
 }

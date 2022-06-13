@@ -19,23 +19,23 @@ public class GeneralPlantService implements GeneralPlantServiceInterface {
         return generalPlantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "General plants not found"));
     }
 
-/*    public void saveGeneralPlant(GeneralPlant generalPlant) {
+  public void saveGeneralPlant(GeneralPlant generalPlant) {
         if (generalPlant.getId() != null) {
             Optional<GeneralPlant> optionalGeneralPlant= generalPlantRepository.findById(generalPlant.getId());
             if (optionalGeneralPlant.isPresent())
                 throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "General plant with id " + generalPlant.getId() + " already exist");
         }
         generalPlantRepository.save(generalPlant);
-    }*/
+    }
 
- /*   public void update(Long id, GeneralPlant generalPlant) {
+  public void update(Long id, GeneralPlant generalPlant) {
         GeneralPlant generalPlantFromDB = generalPlantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "General Plant is not found"));
         generalPlant.setId(generalPlantFromDB.getId());
         generalPlantRepository.save(generalPlant);
-    }*/
+    }
 
-   /* public void deleteGeneralPlant(Long id) {
+    public void deleteGeneralPlant(Long id) {
         GeneralPlant generalPlantFromDB = generalPlantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "General Plant not found"));
         generalPlantRepository.deleteById(id);
-    }*/
+    }
 }

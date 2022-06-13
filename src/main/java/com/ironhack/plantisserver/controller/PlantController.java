@@ -3,11 +3,15 @@ package com.ironhack.plantisserver.controller;
 import com.ironhack.plantisserver.DTO.PlantDTO;
 import com.ironhack.plantisserver.model.GeneralPlant;
 import com.ironhack.plantisserver.model.Plant;
+import com.ironhack.plantisserver.model.User;
 import com.ironhack.plantisserver.repository.GeneralPlantRepository;
 import com.ironhack.plantisserver.repository.PlantRepository;
+import com.ironhack.plantisserver.repository.UserRepository;
+import com.ironhack.plantisserver.service.impl.GeneralPlantService;
 import com.ironhack.plantisserver.service.impl.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,11 +26,32 @@ public class PlantController {
     @Autowired
     private PlantRepository plantRepository;
 
- /*   @PostMapping("/plant")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void savePlant(@RequestBody PlantDTO plant){
-        plantService.savePlant(plant);
-    }*/
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private GeneralPlantRepository generalPlantRepository;
+
+    @Autowired
+    private GeneralPlantService generalPlantService;
+
+    @GetMapping("/generalplants/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public GeneralPlant getGeneralPlantById(@PathVariable(name = "id") Long generalPlantId) {
+        return generalPlantService.findById(generalPlantId);
+    }
+
+    @GetMapping("/generalplants")
+    @ResponseStatus(HttpStatus.OK)
+    public List<GeneralPlant> getGeneralPlant() {
+        return generalPlantRepository.findAll();
+    }
+
+
+    /*    @PostMapping("/plant")
+       @ResponseStatus(HttpStatus.CREATED)
+       public void savePlant(@RequestBody PlantDTO plant){
+           plantService.savePlant(plant);
+       }*/
     @GetMapping("/plant/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Plant getPlantById(@PathVariable(name = "id") Long plantId) {
@@ -39,11 +64,31 @@ public class PlantController {
         return plantRepository.findAll();
     }
 
-    @PostMapping("/plant")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addPlant(@RequestBody @Valid Plant plant){
-        plantService.savePlant(plant);
+    @PostMapping("/{userId}/favorite/{plantId}")
+    User addFavoritePlantToUser(
+            @PathVariable Long userId,
+            @PathVariable Long plantId
+    ) {
+        User user = userRepository.findById(userId).get();
+        Plant plant = plantRepository.findById(plantId).get();
+        user.userFavorites.add(plant);
+        return userRepository.save(user);
     }
+/*    @GetMapping("/plant/user")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Plant> findUserPlant(Authentication authentication) {
+        return plantRepository.findUserPlant(authentication);
+    }*/
+
+
+
+}
+
+/*
+
+
+
+
 
     @PutMapping("/plant/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -57,4 +102,8 @@ public class PlantController {
         plantService.deletePlant(id);
     }
 
+
+
+
 }
+*/

@@ -1,17 +1,20 @@
 package com.ironhack.plantisserver.service.impl;
 
+import com.ironhack.plantisserver.model.Plant;
 import com.ironhack.plantisserver.model.User;
 import com.ironhack.plantisserver.repository.RoleRepository;
 import com.ironhack.plantisserver.repository.UserRepository;
 import com.ironhack.plantisserver.service.interfaces.UserServiceInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,6 +44,8 @@ public class UserService implements UserServiceInterface, UserDetailsService {
         log.info("Fetching all users");
         return userRepository.findAll();
     }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

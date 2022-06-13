@@ -1,16 +1,20 @@
 package com.ironhack.plantisserver.service.impl;
 
-import com.ironhack.plantisserver.DTO.PlantDTO;
 
 import com.ironhack.plantisserver.model.Plant;
 
+
+import com.ironhack.plantisserver.model.User;
 import com.ironhack.plantisserver.repository.PlantRepository;
+import com.ironhack.plantisserver.repository.UserRepository;
 import com.ironhack.plantisserver.service.interfaces.PlantServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,9 +25,12 @@ public class PlantService implements PlantServiceInterface {
     @Autowired
     private PlantRepository plantRepository;
 
+
     public Plant findById(Long id) {
         return plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "plant not found"));
     }
+
+
 
     public void savePlant(Plant plant) {
         if (plant.getId() != null) {
@@ -44,4 +51,6 @@ public class PlantService implements PlantServiceInterface {
         Plant plantFromDB = plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
         plantRepository.deleteById(id);
     }
+
+
 }
