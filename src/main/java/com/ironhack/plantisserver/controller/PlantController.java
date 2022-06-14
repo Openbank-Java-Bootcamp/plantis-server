@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -65,12 +66,13 @@ public class PlantController {
     }
 
     @PostMapping("/{userId}/favorite/{plantId}")
+    @ResponseStatus(HttpStatus.OK)
     User addFavoritePlantToUser(
             @PathVariable Long userId,
             @PathVariable Long plantId
     ) {
-        User user = userRepository.findById(userId).get();
-        Plant plant = plantRepository.findById(plantId).get();
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User is not found"));
+        GeneralPlant plant = generalPlantRepository.findById(plantId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant is not found"));
         user.userFavorites.add(plant);
         return userRepository.save(user);
     }

@@ -32,7 +32,4 @@ public class Plant {
     private String waterRequirement;
     @Size(min=3,max=200, message="Must be between 3 and 200 characters.")
     private String notes;
-    @JsonIgnore
-    @ManyToMany(mappedBy = "userFavorites")
-    private List<User> users;
 }

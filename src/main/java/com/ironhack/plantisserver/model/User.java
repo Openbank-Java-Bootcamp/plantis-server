@@ -38,10 +38,10 @@ public class User {
     @ManyToMany
     @JoinTable(
             name = "user_plants",
-            joinColumns = @JoinColumn(name = "plants_id"),
-            inverseJoinColumns = @JoinColumn(name = "users_id")
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "plants_id")
     )
-    public List<Plant> userFavorites;
+    public List<GeneralPlant> userFavorites;
 
     public User(String name, String email, String password) {
         this.name = name;

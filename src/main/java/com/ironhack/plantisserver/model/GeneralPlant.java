@@ -1,5 +1,6 @@
 package com.ironhack.plantisserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ironhack.plantisserver.enums.Light;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,10 @@ public class GeneralPlant {
     private String lightRequirement;
     @NotEmpty(message = "Provide a water quantity.")
     private String waterRequirement;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "userFavorites")
+    private List<User> users;
 
     public GeneralPlant(String image, String name, String description, String lightRequirement, String waterRequirement) {
         this.image = image;
