@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -61,21 +62,29 @@ public class PlantController {
 
     @GetMapping("/plant")
     @ResponseStatus(HttpStatus.OK)
-    public List<Plant> getPlant() {
-        return plantRepository.findAll();
+    public List<Plant> getPlants(@RequestParam Optional<Long> userId) {
+        return plantService.findAll(userId);
     }
 
-    @PostMapping("/{userId}/favorite/{plantId}")
+    @GetMapping("/plant/favorite/{plantId}")
     @ResponseStatus(HttpStatus.OK)
-    User addFavoritePlantToUser(
-            @PathVariable Long userId,
-            @PathVariable Long plantId
-    ) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User is not found"));
+    public User addFavoritePlantToUser(@PathVariable Long plantId, Authentication authentication) {
+        String email = (String) authentication.getPrincipal();
+        User userFromDb = userRepository.findByEmail(email);
         GeneralPlant plant = generalPlantRepository.findById(plantId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant is not found"));
-        user.userFavorites.add(plant);
-        return userRepository.save(user);
+        Plant newUserPlant = new Plant(plant.getName(),plant.getImage(),plant.getDescription(),plant.getLightRequirement(),plant.getWaterRequirement());
+        userFromDb.userFavorites.add(newUserPlant);
+        return userRepository.save(userFromDb);
     }
+
+
+    @DeleteMapping("/favorite/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePlant(@PathVariable Long id){
+        plantService.deletePlant(id);
+    }
+
+
 /*    @GetMapping("/plant/user")
     @ResponseStatus(HttpStatus.OK)
     public List<Plant> findUserPlant(Authentication authentication) {

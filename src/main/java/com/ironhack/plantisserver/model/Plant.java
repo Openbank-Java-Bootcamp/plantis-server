@@ -27,9 +27,17 @@ public class Plant {
     @NotEmpty(message = "Provide a description.")
     private String description;
     @NotEmpty(message = "Provide a preference of light.")
-    private Light lightPreference;
+    private String lightPreference;
     @NotEmpty(message = "Provide a water quantity.")
     private String waterRequirement;
     @Size(min=3,max=200, message="Must be between 3 and 200 characters.")
     private String notes;
+
+    public Plant(String name, String image, String description, String lightPreference, String waterRequirement) {
+        this.name = name;
+        this.image = image;
+        this.description = description;
+        this.lightPreference = lightPreference;
+        this.waterRequirement = waterRequirement;
+    }
 }

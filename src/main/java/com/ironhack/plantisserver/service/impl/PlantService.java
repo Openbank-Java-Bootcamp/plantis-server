@@ -25,11 +25,21 @@ public class PlantService implements PlantServiceInterface {
     @Autowired
     private PlantRepository plantRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
 
     public Plant findById(Long id) {
         return plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "plant not found"));
     }
 
+    public List<Plant> findAll(Optional<Long> userId){
+        if(userId.isPresent()){
+           User userFromDB = userRepository.findById(userId.get()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+           return userFromDB.getUserFavorites();
+        }
+        return plantRepository.findAll();
+    }
 
 
     public void savePlant(Plant plant) {

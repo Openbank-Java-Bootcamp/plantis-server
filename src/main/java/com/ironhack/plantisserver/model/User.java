@@ -35,13 +35,13 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_plants",
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "plants_id")
     )
-    public List<GeneralPlant> userFavorites;
+    public List<Plant> userFavorites;
 
     public User(String name, String email, String password) {
         this.name = name;
