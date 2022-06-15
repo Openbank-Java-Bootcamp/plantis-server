@@ -2,9 +2,7 @@ package com.ironhack.plantisserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ironhack.plantisserver.enums.Light;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -13,7 +11,8 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Plant {
@@ -34,7 +33,7 @@ public class Plant {
     private String notes;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "userFavorites", cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH})
+    @ManyToMany(mappedBy = "userFavorites")
     private List<User> users;
 
     public Plant(String name, String image, String description, String lightPreference, String waterRequirement) {

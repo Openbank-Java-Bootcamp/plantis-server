@@ -1,6 +1,7 @@
 package com.ironhack.plantisserver.controller;
 
 import com.ironhack.plantisserver.DTO.PlantDTO;
+import com.ironhack.plantisserver.DTO.PlantNoteDTO;
 import com.ironhack.plantisserver.model.GeneralPlant;
 import com.ironhack.plantisserver.model.Plant;
 import com.ironhack.plantisserver.model.User;
@@ -63,48 +64,28 @@ public class PlantController {
 
     @DeleteMapping("/favourite/{plantId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePlant(@PathVariable Long plantId){
-        plantService.deletePlant(plantId);
+    public void deletePlant(@PathVariable Long plantId,Authentication authentication){
+        plantService.deletePlant(plantId,authentication);
     }
-
-   /* @DeleteMapping("/favourite/{plantId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateFavorite(@PathVariable Long plantId, Authentication authentication){
-        System.out.println(plantId);
-        plantService.updateFavorites(plantId, authentication);
-    }*/
-
 
     @PutMapping("/favourite/{plantid}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePlant(@PathVariable Long id,@RequestBody @Valid Plant plant){
-        plantService.update(id, plant);
+    public void updatePlant(@PathVariable Long plantid,@RequestBody @Valid Plant plant){
+        plantService.update(plantid, plant);
     }
+
+    @PatchMapping("/favourite/{plantId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateNotes(@PathVariable Long plantId, @RequestBody PlantNoteDTO note){
+        System.out.println(plantId);
+        System.out.println(note);
+        plantService.updateNotes(plantId, note.getNote());
+    }
+
+
 
 
 
 }
 
-/*
 
-
-
-
-
-    @PutMapping("/plant/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePlant(@PathVariable Long id,@RequestBody @Valid Plant plant){
-        plantService.update(id, plant);
-    }
-
-    @DeleteMapping("/generalplant/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePlant(@PathVariable Long id){
-        plantService.deletePlant(id);
-    }
-
-
-
-
-}
-*/

@@ -58,9 +58,15 @@ public class PlantService implements PlantServiceInterface {
         plantRepository.save(plant);
     }
 
-    public void deletePlant(Long id) {
-        Plant plantFromDB = plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
-        plantRepository.deleteById(id);
+    public void deletePlant(Long plantId, Authentication authentication) {
+        Plant plantFromDB = plantRepository.findById(plantId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
+        String email = (String) authentication.getPrincipal();
+        User userFromDB = userRepository.findByEmail(email);
+
+        plantFromDB.getUsers().remove(userFromDB);
+        userFromDB.getUserFavorites().remove(plantFromDB);
+
+        plantRepository.deleteById(plantId);
     }
 
 
@@ -74,5 +80,23 @@ public class PlantService implements PlantServiceInterface {
         userFromDb.setUserFavorites(usersPlants);
         userRepository.save(userFromDb);
         System.out.println(userFromDb.getUserFavorites().size());
+    }
+
+    public void updateNotes(Long id, String note) {
+        System.out.println(id);
+        System.out.println(note);
+            Optional<Plant> plant = plantRepository.findById(id);
+            if (plant.isPresent()) {
+                try {
+                    plant.get().setNotes(note);
+                    plantRepository.save(plant.get());
+                } catch (Exception e) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Note value not valid.");
+                }
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The plant doesn't exist.");
+            }
+
+
     }
 }
