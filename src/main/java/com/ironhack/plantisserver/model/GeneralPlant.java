@@ -1,7 +1,7 @@
 package com.ironhack.plantisserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ironhack.plantisserver.enums.Light;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

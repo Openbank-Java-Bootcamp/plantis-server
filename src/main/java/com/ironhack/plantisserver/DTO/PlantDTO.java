@@ -1,7 +1,7 @@
 package com.ironhack.plantisserver.DTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ironhack.plantisserver.enums.Light;
+
 import com.ironhack.plantisserver.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 public class PlantDTO {
     private String image;
     private String description;
-    private Light lightPreference;
+    private String lightPreference;
     private String waterRequirement;
     private String notes;
     private Long userId;

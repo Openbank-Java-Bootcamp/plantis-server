@@ -20,14 +20,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Provide a name.")
+    @NotEmpty(message = "Enter the name.")
     private String name;
+    @NotEmpty(message = "Enter all details.")
     @Pattern(regexp = "[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
             + "[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
             + "(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\\.)+[A-Za-z0-9]"
             + "(?:[A-Za-z0-9-]*[A-Za-z0-9])?",
-            message = "Provide a valid email address.")
+            message = "Provide a valid email address for example: example@example.com")
     private String email;
+    @NotEmpty(message = "Enter all details.")
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}",
             message = "Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.")
     private String password;
