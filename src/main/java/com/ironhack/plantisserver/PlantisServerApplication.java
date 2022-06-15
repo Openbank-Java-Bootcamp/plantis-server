@@ -39,7 +39,7 @@ public class PlantisServerApplication {
 	@Bean
 	CommandLineRunner run(GeneralPlantService generalPlantService, UserService userService) {
 		return args -> {
-			/*userService.saveUser(new User("Carmen","carmen@hotmail.com","Apple123$"));
+		/*	userService.saveUser(new User("Carmen","carmen@hotmail.com","Apple123$"));
 
 			generalPlantService.saveGeneralPlant(new GeneralPlant("https://drive.google.com/uc?id=15VMo7w43ufDCXrDf_Cr65DIM2blEv8U3&export=download","Cactus","A cactus  is a member of the plant family Cactaceae","Partial sun","Not often"));
 			generalPlantService.saveGeneralPlant(new GeneralPlant("https://drive.google.com/uc?id=1vhtxgkSoEb3IAxomuUbYkuvEcHvcX2VO&export=download","Begonia","Begonia is a genus of perennial flowering plants in the family Begoniaceae. The genus contains more than 2,000 different plant species. The Begonias are native to moist subtropical and tropical climates. ","SHADE","Three times per week"));

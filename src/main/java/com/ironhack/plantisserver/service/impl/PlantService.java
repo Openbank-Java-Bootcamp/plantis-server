@@ -11,6 +11,7 @@ import com.ironhack.plantisserver.service.interfaces.PlantServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -63,4 +64,15 @@ public class PlantService implements PlantServiceInterface {
     }
 
 
+    public void updateFavorites(Long id, Authentication authentication) {
+
+        String email = (String) authentication.getPrincipal();
+        User userFromDb = userRepository.findByEmail(email);
+        System.out.println(userFromDb.getUserFavorites().size());
+        List<Plant> usersPlants = userFromDb.getUserFavorites();
+
+        userFromDb.setUserFavorites(usersPlants);
+        userRepository.save(userFromDb);
+        System.out.println(userFromDb.getUserFavorites().size());
+    }
 }

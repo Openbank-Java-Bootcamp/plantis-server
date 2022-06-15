@@ -33,6 +33,10 @@ public class Plant {
     @Size(min=3,max=200, message="Must be between 3 and 200 characters.")
     private String notes;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "userFavorites", cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH})
+    private List<User> users;
+
     public Plant(String name, String image, String description, String lightPreference, String waterRequirement) {
         this.name = name;
         this.image = image;

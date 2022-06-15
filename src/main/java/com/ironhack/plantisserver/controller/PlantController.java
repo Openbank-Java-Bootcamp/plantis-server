@@ -36,37 +36,20 @@ public class PlantController {
     @Autowired
     private GeneralPlantService generalPlantService;
 
-    @GetMapping("/generalplants/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public GeneralPlant getGeneralPlantById(@PathVariable(name = "id") Long generalPlantId) {
-        return generalPlantService.findById(generalPlantId);
-    }
 
-    @GetMapping("/generalplants")
-    @ResponseStatus(HttpStatus.OK)
-    public List<GeneralPlant> getGeneralPlant() {
-        return generalPlantRepository.findAll();
-    }
-
-
-    /*    @PostMapping("/plant")
-       @ResponseStatus(HttpStatus.CREATED)
-       public void savePlant(@RequestBody PlantDTO plant){
-           plantService.savePlant(plant);
-       }*/
-    @GetMapping("/plant/{id}")
+    @GetMapping("/plants/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Plant getPlantById(@PathVariable(name = "id") Long plantId) {
         return plantService.findById(plantId);
     }
 
-    @GetMapping("/plant")
+    @GetMapping("/plants")
     @ResponseStatus(HttpStatus.OK)
     public List<Plant> getPlants(@RequestParam Optional<Long> userId) {
         return plantService.findAll(userId);
     }
 
-    @GetMapping("/plant/favorite/{plantId}")
+    @GetMapping("/plants/favourite/{plantId}")
     @ResponseStatus(HttpStatus.OK)
     public User addFavoritePlantToUser(@PathVariable Long plantId, Authentication authentication) {
         String email = (String) authentication.getPrincipal();
@@ -78,18 +61,25 @@ public class PlantController {
     }
 
 
-    @DeleteMapping("/favorite/{id}")
+    @DeleteMapping("/favourite/{plantId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePlant(@PathVariable Long id){
-        plantService.deletePlant(id);
+    public void deletePlant(@PathVariable Long plantId){
+        plantService.deletePlant(plantId);
     }
 
-
-/*    @GetMapping("/plant/user")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Plant> findUserPlant(Authentication authentication) {
-        return plantRepository.findUserPlant(authentication);
+   /* @DeleteMapping("/favourite/{plantId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateFavorite(@PathVariable Long plantId, Authentication authentication){
+        System.out.println(plantId);
+        plantService.updateFavorites(plantId, authentication);
     }*/
+
+
+    @PutMapping("/favourite/{plantid}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updatePlant(@PathVariable Long id,@RequestBody @Valid Plant plant){
+        plantService.update(id, plant);
+    }
 
 
 

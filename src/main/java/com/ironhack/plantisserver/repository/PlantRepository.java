@@ -10,6 +10,4 @@ import java.util.List;
 @Repository
 public interface PlantRepository extends JpaRepository<Plant, Long> {
 
-  /* @Query(value= "SELECT * FROM plant WHERE user_id = :userId", nativeQuery = true)
-    List<Plant> findPlantIdByUserId(Long userId);*/
 }
