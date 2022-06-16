@@ -46,6 +46,8 @@ public class PlantisServerApplication {
 
 
 			roleService.saveRole(new Role(null, "ROLE_ADMIN"));
+			roleService.saveRole(new Role(null, "ROLE_USER"));
+
 
 			userService.saveUser(new User("Carmen","carmen@hotmail.com","Apple123$"));
 
