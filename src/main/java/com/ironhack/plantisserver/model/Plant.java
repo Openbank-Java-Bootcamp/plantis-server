@@ -26,7 +26,7 @@ public class Plant {
     @NotEmpty(message = "Provide a description.")
     private String description;
     @NotEmpty(message = "Provide a preference of light.")
-    private String lightPreference;
+    private String lightRequirement;
     @NotEmpty(message = "Provide a water quantity.")
     private String waterRequirement;
     @Size(min=3,max=200, message="Must be between 3 and 200 characters.")
@@ -36,11 +36,11 @@ public class Plant {
     @ManyToMany(mappedBy = "userFavorites")
     private List<User> users;
 
-    public Plant(String name, String image, String description, String lightPreference, String waterRequirement) {
+    public Plant(String name, String image, String description, String lightRequirement, String waterRequirement) {
         this.name = name;
         this.image = image;
         this.description = description;
-        this.lightPreference = lightPreference;
+        this.lightRequirement = lightRequirement;
         this.waterRequirement = waterRequirement;
     }
 }

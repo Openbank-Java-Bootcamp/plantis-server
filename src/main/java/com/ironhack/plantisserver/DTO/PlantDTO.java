@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 public class PlantDTO {
     private String image;
     private String description;
-    private String lightPreference;
+    private String lightRequirement;
     private String waterRequirement;
     private String notes;
     private Long userId;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,4 +31,25 @@ public class GeneralPlantController {
     public List<GeneralPlant> getGeneralPlant() {
         return generalPlantRepository.findAll();
     }
+
+    @PostMapping("/generalplants")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addGeneralPlant(@RequestBody @Valid GeneralPlant generalPlant){
+        generalPlantService.saveGeneralPlant(generalPlant);
+    }
+
+    @PutMapping("/generalplants/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateGeneralPlant(@PathVariable Long id,@RequestBody @Valid GeneralPlant generalPlant){
+        generalPlantService.update(id, generalPlant);
+    }
+
+    @DeleteMapping("/generalplants/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteGeneralPlant(@PathVariable Long id){
+        generalPlantService.deleteGeneralPlant(id);
+    }
+
+
+
 }
