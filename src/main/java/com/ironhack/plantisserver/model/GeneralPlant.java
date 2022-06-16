@@ -24,7 +24,7 @@ public class GeneralPlant {
     @Lob
     private String image;
     @NotNull
-    @Size(min=3,max=20, message="Must be between 3 and 20 characters.")
+    @Size(min=1,max=40, message="Must be between 3 and 20 characters.")
     private String name;
     @NotEmpty(message = "Provide a description.")
     private String description;
