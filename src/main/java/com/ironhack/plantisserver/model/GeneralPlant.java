@@ -21,6 +21,7 @@ public class GeneralPlant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty(message = "Provide a url image.")
+    @Lob
     private String image;
     @NotNull
     @Size(min=3,max=20, message="Must be between 3 and 20 characters.")

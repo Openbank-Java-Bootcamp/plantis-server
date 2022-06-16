@@ -33,11 +33,16 @@ public class UserService implements UserServiceInterface, UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private RoleService roleService;
+
     public User saveUser(User userSignupDTO) {
         log.info("Saving a new user {} inside of the database", userSignupDTO.getName());
         User user = new User(userSignupDTO.getName(), userSignupDTO.getEmail(), userSignupDTO.getPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        User returnUser = userRepository.save(user);
+        roleService.addRoleToUser(returnUser.getEmail(), "ROLE_USER");
+        return returnUser;
     }
     //optional if we have an admin
     public List<User> getUsers() {
@@ -56,9 +61,9 @@ public class UserService implements UserServiceInterface, UserDetailsService {
         } else {
             log.info("User is found in the database: {}", email);
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-            user.getRoles().forEach(role -> {
-                authorities.add(new SimpleGrantedAuthority(role.getName()));
-            });
+
+                authorities.add(new SimpleGrantedAuthority(user.getRoles().getName()));
+
             return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
         }
     }
