@@ -25,8 +25,7 @@ account.
 - REST API
 
  
-## Future Work
- - Implement water calendar
+
   
 
 ## Models
@@ -105,7 +104,9 @@ GeneralPlant model
 
 
 <br>
-  
+    ## Future Work
+ - Implement water calendar
+
  ## Resources
  - Google
   
