@@ -104,7 +104,9 @@ GeneralPlant model
 
 
 <br>
- ## Future Work
+
+## Future Work
+
  - Implement water calendar
 
  ## Resources
