@@ -110,7 +110,8 @@ GeneralPlant model
  - Implement water calendar
 
  ## Resources
- - Google
+ - Stackoverflow
+-  W3schools
   
   
   ## Links
